@@ -54,6 +54,9 @@
     <ClCompile Include="data.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="sll_node.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="linked_list.h">
@@ -85,6 +88,9 @@
     </ClInclude>
     <ClInclude Include="node.h">
       <Filter>헤더 파일\node</Filter>
+    </ClInclude>
+    <ClInclude Include="sll_node.h">
+      <Filter>헤더 파일\structures\linked_list</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

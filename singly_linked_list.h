@@ -6,7 +6,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include "data_type.h"
-#include "node.h"
+#include "sll_node.h"
 #define _SLL_BUFFER_SIZE 20
 
 typedef struct _Singly_linked_list SLL;
@@ -14,16 +14,16 @@ typedef struct _Singly_linked_list SLL;
 struct _Singly_linked_list
 {
 	int num_of_nodes;
-	Node* cursor;
+
+	SLL_Node* cursor; // if cursor == null and cursor_index == -1,
+	int cursor_index; // that means cursor is unavailable. (cursor is at start or sll is empty.)
+
 	// more metadatas coming soon..
-	Node* head_node;
+	SLL_Node* head_node;
 };
 
-
-
-
 SLL* sll_create();
-Node_type sll_node_type(SLL* s);
+Node_Type sll_node_type(SLL* s);
 SLL* sll_get_node_datatype(const SLL* s);
 SLL* sll_get_node_data(const SLL* s);
 SLL* sll_get_next_node(const SLL* s);
@@ -39,7 +39,7 @@ void sll_pop(SLL* s);
 void sll_clear(SLL* s);
 void sll_kill(SLL** s);
 
-Node_type sll_node_type(const SLL* s, const Node* n);
+Node_Type sll_node_type(const SLL* s, const Node* n);
 
 
 

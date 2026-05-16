@@ -1,16 +1,16 @@
 #pragma once
 #include "data.h"
 #include "data_type.h"
+#include <stdbool.h>
 
 typedef struct _Node Node;
 
-typedef enum _Node_Type; 
+typedef enum _Node_Type Node_Type; 
 
 struct _Node
 {
 	Data_Type type;
 	Data data;
-	Node* next_node;
 };
 
 enum _Node_Type

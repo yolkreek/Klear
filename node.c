@@ -9,7 +9,6 @@ Node* node_create(Data_Type type, Data data)
 	Node* n = (Node*)malloc(sizeof(Node));
 	n->type = type;
 	n->data = data;
-	n->next_node = NULL;
 }
 
 Data_Type node_get_type(const Node* n)
@@ -25,16 +24,11 @@ Data* node_get_data(const Node* n)
 	switch (node_get_type(n))
 	{
 	case DATA_TYPE_UNDEFINED: return NULL;
-	default: &(n->data);
+	default: return &(n->data);
 	}
 }
 
 
-Node* node_get_nextnode(const Node* n)
-{
-	if (n == NULL) return NULL;
-	return n->next_node;
-}
 
 
 

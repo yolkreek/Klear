@@ -5,64 +5,23 @@ SLL* sll_create()
 	SLL* s = (SLL*)malloc(sizeof(SLL));
 	s->num_of_nodes = 0;
 	s->cursor = NULL;
+	s->cursor_index = -1;
 	s->head_node = NULL;
-
 	return s;
 }
 
-
-
-SLL* sll_get_node_datatype(const SLL* s)
+SLL_Node* sll_get_next_node(const SLL_Node* sn)
 {
-	if (s == NULL)
-	{
-		printf("Attempting to get next node of NULL.\n");
-		return NULL;
-	}
-	return s->next_node;
+	return sn->next_node;
 }
 
-SLL* sll_get_node_data(const SLL* s)
+SLL_Node* sll_get_last_node(SLL* s)
 {
-	if (s == NULL)
-	{
-		printf("Attempting to get next node of NULL.\n");
-		return NULL;
-	}
-	return s->next_node;
-}
+	SLL_Node* last_node = s->head_node;
+	for (int i = 0; i < s->num_of_nodes - 1; i++)
+		last_node = sll_get_next_node(last_node->next_node);
 
-SLL* sll_get_next_node(const SLL* s)
-{
-	if (s == NULL)
-	{
-		printf("Attempting to get next node of NULL.\n");
-		return NULL;
-	}
-
-	if (sll_node_type == NODE_TYPE_EMPTY) return NULL;
-
-	return s->next_node;
-}
-
-Node* sll_get_last_node(SLL* s)
-{
-
-	Node* last_node;
-	if (sll_is_empty(s)) return NULL;
-
-	sll_cursor_init(s);
-	while (s->cursor->next_node != NULL)
-		s->cursor = s->cursor->next_node;
-	
-	last_node = s->cursor;
-	
 	return last_node;
-}
-
-SLL* sll_delete_node(SLL* s)
-{
-
 }
 
 char* sll_data2str(const SLL* s) //YOU MUST FREE temp.
@@ -116,97 +75,61 @@ void sll_print_info(SLL* const s)
 }
 
 
-void sll_append(SLL* sll, Data_Type type, void* data)
+void sll_append(SLL* s, SLL_Node* sn)
 {
-	SLL* s;
-	SLL* last_node = sll_get_last_node(sll);
+	if (s == NULL || sn == NULL) return;
 
-	s = (SLL*)calloc(1, sizeof(SLL));
-
-	if (type == DATA_TYPE_INT)
-	{
-		s->type = DATA_TYPE_INT;
-		s->data = (int*)malloc(sizeof(int));
-		*(int*)s->data = (int)data;
-	}
-	/*else if (sll->type == FLOAT)
-	{
-		int n = 0;
-		s->data = (float*)malloc(sizeof(float));
-		*(float*)s->data = (float)data;
-	}*/
-	else if (type == DATA_TYPE_STR)
-	{
-		s->type = DATA_TYPE_STR;
-		s->data = (char*)malloc((strlen((char*)data) + 1) * sizeof(char) );
-		strcpy((char*)s->data, data);
-	}
-	else
-	{
-		printf("Unsupported Type.\n");
-		exit(0);
-	}
+	SLL_Node* last_node = sll_get_last_node(s);
 
 	if (last_node == NULL)
-	{
-		s->index = 0;
-		*sll = *s;
-	}
+		s->head_node = sn;
 	else
-	{
-		s->index = last_node->index + 1;
-		last_node->next_node = s;
-	}
+		last_node->next_node = sn;
 
+	s->num_of_nodes++;
 	return;
 
 }
 
 void sll_pop(SLL* s)
 {
-	SLL* last_node = sll_get_last_node(s);
+	if (s == NULL) return;
+	if (sll_is_empty(s)) return;
+	if (s->num_of_nodes == 1)
+	{
+		sll_clear(s);
+		return;
+	}
 
+	SLL_Node* second_last_node = s->head_node;
+	for (int i = 0; i < s->num_of_nodes - 2; i++)
+		second_last_node = second_last_node->next_node;
+
+	free(second_last_node->next_node);
+	second_last_node->next_node = NULL;
+	s->num_of_nodes--;
 }
 
 void sll_clear(SLL* s)
 {
-	SLL* current_node = s;
-	SLL* next_node = s->next_node;
-	if (s->index == -1)
+	if (s == NULL) return;
+	if (s == sll_is_empty(s)) return;
+
+	SLL_Node* crrnt_node = s->head_node;
+	SLL_Node* next_node = crrnt_node->next_node;
+
+	while (next_node != NULL)
 	{
-		printf("How do I kill a dead?\n");
+		free(crrnt_node);
+		crrnt_node = next_node;
+		next_node = crrnt_node->next_node;
 	}
-	else if (s->index == 0)
-	{
-		if (!sll_is_empty(s))
-		{
-			while (current_node != NULL)
-			{
-				free(current_node->data);
-				current_node = current_node->next_node;
-			}	
 
-			current_node = s;
-			next_node = s->next_node;
-
-			while (next_node != NULL)
-			{
-				current_node = next_node;
-				next_node = current_node->next_node;
-				free(current_node);			
-			}
-
-		}
-
-		s->index = -1;
-		s->type = DATA_TYPE_UNDEFINED;
-		s->data = NULL;
-		s->next_node = NULL;
-	}
-	else
-	{
-		printf("Input the head node.\n");
-	}
+	s->cursor = NULL;
+	s->cursor_index = -1;
+	s->head_node = NULL;
+	s->num_of_nodes = 0;
+	
 }
 
 void sll_kill(SLL** s)
@@ -217,31 +140,146 @@ void sll_kill(SLL** s)
 	*s = NULL;
 }
 
-Node_type sll_node_type(SLL* s, const Node* n)
+Node_Type sll_node_type(SLL* s, const SLL_Node* n)
 {
-	if (n == NULL || s->num_of_nodes == 0) return NODE_TYPE_NULL;
+	if (n == NULL) return NODE_TYPE_NULL;
 
-	if (s->num_of_nodes == 1)
+	if (sll_is_empty(s))
+		return NODE_TYPE_NULL;
+	
+	if (s->num_of_nodes == 1 && n == s->head_node) return NODE_TYPE_WHOLE;
+
+	if (n == s->head_node)
+		return NODE_TYPE_HEAD;
+	else
 	{
-		if (s->head_node == n) return NODE_TYPE_WHOLE;
-		else return NODE_TYPE_NULL;
+		if (n->next_node == NULL) return NODE_TYPE_TAIL;
+		else return NODE_TYPE_BODY;
+	}
+}
+
+
+//cursor
+
+void sll_cursor_init(SLL* s)
+{
+	if (sll_is_empty(s)) return;
+
+	s->cursor = s->head_node;
+	s->cursor_index = 0;
+}
+
+SLL_Node* sll_cursor_next(SLL* s)
+{
+	if (sll_cursor_is_overflow(s)) return NULL;
+
+	s->cursor = s->cursor->next_node;
+	s->cursor_index++;
+
+	return s->cursor;
+}
+
+SLL_Node* sll_cursor_offset(SLL* s, int offset)
+{
+	if (s == NULL) return;
+
+	if (sll_cursor_is_overflow(s) && offset >= 0) return s->cursor;
+	if (sll_cursor_is_underflow(s) && offset <= 0) return s->cursor;
+
+	int sllnode_index = s->cursor_index + offset;
+
+	if (sllnode_index >= s->num_of_nodes) { sll_cursor_set_overflow(s); return s->cursor; }
+	if (sllnode_index < 0) { sll_cursor_set_underflow(s); return s->cursor; }
+
+	
+	if (offset >= 0)
+	{
+		for (int i = 0; i < offset; i++)
+			sll_cursor_next(s);
 	}
 	else
 	{
 		sll_cursor_init(s);
-		if (s->head_node == n) return NODE_TYPE_HEAD;
+		for (int i = 0; i < sllnode_index; i++)
+			sll_cursor_next(s);
 	}
+
+	return s->cursor;
+	
 }
 
-void sll_cursor_init(SLL* s)
+SLL_Node* sll_cursor_set_by_node(SLL* s, SLL_Node* sn)
 {
-	s->cursor = s->head_node;
+	sll_cursor_init(s);
+
+	for (int i = 0; s->cursor != sn; i++)
+		sll_cursor_next(s);
+
+	return s->cursor;
+	
+}
+
+SLL_Node* sll_cursor_set_by_index(SLL* s, int index)
+{
+	if (index < 0)
+	{
+		sll_cursor_set_underflow(s); 
+		return s->cursor;
+	}
+	else if (index >= s->num_of_nodes)
+	{
+		sll_cursor_set_overflow(s);
+		return s->cursor;
+	}
+
+	sll_cursor_init(s);
+
+	for (int i = 0; i < index; i++)
+		sll_cursor_next(s);
+
+	return s->cursor;
+}
+
+SLL_Node* sll_cursor_return(SLL* s)
+{
+	return s->cursor;
+}
+
+bool sll_cursor_is_overflow(const SLL* s)
+{
+	return s->cursor == NULL || s->cursor_index == s->num_of_nodes;
+}
+
+void sll_cursor_set_overflow(SLL* s)
+{
+	s->cursor = NULL;
+	s->cursor_index = s->num_of_nodes;
+}
+
+bool sll_cursor_is_underflow(const SLL* s)
+{
+	return s->cursor == NULL || s->cursor_index == -1;
+}
+
+void sll_cursor_set_underflow(SLL* s)
+{
+	s->cursor = NULL;
+	s->cursor_index = -1;
+}
+
+void sll_cursor_validate(SLL* s)
+{
+
 }
 
 bool sll_is_empty(const SLL* s)
 {
 	return s->num_of_nodes == 0;
 }
+
+
+
+
 
 
 
