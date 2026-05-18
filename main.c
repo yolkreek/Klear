@@ -7,13 +7,21 @@
 
 int main()
 {
-	Tree* tree = tree_create();
+	int a = 0;
+	float b = 4.5f;
+	
+	a = K_float(4.5f);
+	printf("%d", a);
+
+
+
+	/*Tree* tree = tree_create();
 	tree_add(tree, 2, 12312312);
 	tree_add(tree, 2, T_LEFT);
 	tree_add(tree, 3, T_RIGHT);
 	tree_add(tree->right, 4, T_RIGHT);
 	tree_add(tree->right, 5, T_RIGHT);
-	tree_add(tree->right, 6, T_LEFT);
+	tree_add(tree->right, 6, T_LEFT);*/
 
 
 
@@ -21,4 +29,5 @@ int main()
 	
 	return 0;
 }
+
 

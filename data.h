@@ -1,14 +1,23 @@
 #pragma once
 #include "data_type.h"
-typedef union _Data Data;
+#include <stdint.h>
+typedef union _rawData rawData;
+typedef struct _Data Data;
 
-union _Data
+union _rawData
 {
 	int i;
 	float f;
-	char* s;
+	char* s;	//32bit: 4bytes, 64bit: 8bytes
+	void* obj;	//32bit: 4bytes, 64bit: 8bytes
 };
 
-int get_data_int(const Data* n);
-float get_data_float(const Data* n);
-char* get_data_str(const Data* n);
+struct _Data
+{
+	Data_Type type;
+	rawData r_data;
+};
+
+
+int K_int(int i);
+int K_float(float f);

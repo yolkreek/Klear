@@ -1,0 +1,91 @@
+
+sll_clear(s)
+
+To Assembly..
+
+0x0000 LOAD s
+0x0004 CALL sll_clear
+0x0008 ..............
+
+// 여기서 sll_clear 함수 시작.
+0x0010 PUSH NULL
+0x0014 EQUAL //두개의 POP한 값들을 비교하여, 같으면 NOT-ZERO, 다르면 ZERO를 반환.
+0x0018 JNZ 0x0008 //고민: 바로 메인 함수로 넘어가게 할까 아니면 sll_clear 함수의 rtn으로 점프하게 할까?
+0x001c LOAD s
+0x0020 CALL sll_is_empty
+0x0024 EQL
+0x0028 JNZ 0x0008 //0x0018의 고민과 마찬가지다.
+0x002c LOAD s->head_node //0x0100의 고민과 마찬가지다.
+0x0030 STORE crrnt_node
+0x0034 LOAD crrnt_node->next_node //0x0100의 고민과 마찬가지다.
+0x0038 STORE next_node
+0x003c LOAD next_node
+0x0040 PUSH 0 //그러나 NULL을 그냥 0이라 두는게 맞겠지? 어짜피 NULL도 결국엔 다양한 종류의 0중에 하나고 그걸 사람이 보기 쉽게 한거니까.
+0x0044 NEQL
+0x0048 JNZ 0x0060
+0x004c PUSH crrnt_node
+0x0050 CALL free
+0x0054 MOV crrnt_node next_node
+0x0058 MOV next_node crrnt_node->next_node
+0x005c JMP 0x003c
+0x0060 MOV s->cursor 0
+0x0060 MOV s->cursor_index -1
+0x0060 MOV s->head_node 0
+0x0060 MOV s->num_of_nodes 0
+0x0060 RETURN
+
+// 여기서 sll_is_empty 함수 시작
+0x0100 LOAD s->num_of_nodes //그러나 -> 연산자가 신경쓰인다. LOAD [s+0x...]이런식으로 오프셋을 둬서 가져오지 않을까?
+0x0104 PUSH 0
+0x0108 EQL
+0x010c RETURN
+
+0x1000 PUSH
+0x1004
+0x1008
+0x100c
+0x1010
+0x1014
+0x1018
+0x101c
+0x1020
+0x1024
+0x0028
+0x002c
+0x0030
+0x0034
+0x0038
+0x003c
+0x0040
+0x0044
+0x0048
+0x004c
+0x0050
+0x0054
+0x0058
+0x005c
+
+int K_int(int i)
+{
+	return i;
+}
+
+void K_float(float f)
+{
+	/*if (sizeof(float) > sizeof(int))
+	{
+		printf("KVM isn't supported in your environment yet.");
+		exit(0);
+	}
+
+	void* _f = malloc(sizeof(float));
+	int i = 0;
+
+	memcpy(_f, &f, sizeof(float));
+	i = &(int*)_f;
+
+	free(_f);
+
+
+	return i;*/
+}

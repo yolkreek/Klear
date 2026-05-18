@@ -3,6 +3,7 @@
 #include "data_type.h"
 #include <stdbool.h>
 
+
 typedef struct _Node Node;
 
 typedef enum _Node_Type Node_Type; 
@@ -23,8 +24,14 @@ enum _Node_Type
 
 };
 
-Node* node_create(Data_Type type, Data data);
+
+
+Node* node_create_int(int data);
+Node* node_create_float(float data);
+Node* node_create_str(char* data);
+Node* node_create_obj(void* data);
+Node* node_create_ptr(int data);
 Data_Type node_get_type(const Node* n);
-Node* node_get_data(const Node* n);
+Data* node_get_data(const Node* n);
 
 Node* node_get_nextnode(const Node* n);
