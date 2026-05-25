@@ -1,10 +1,14 @@
 #pragma once
 
-typedef enum _MyOpcode
+typedef enum _KOpcode
 {
-	ADD = 0x01,
-	SUB = 0x02,
-	MUL = 0x03,
-	DIV = 0x04,
-	MOV = 0x05,
+	OP_PUSH,
+	OP_POP,
+	OP_STORE,
+	OP_LOAD,
+	OP_ADD,
+	OP_SUB,
+	OP_MUL,
+	OP_DIV,
+	OP_MOV,
 } Opcode;

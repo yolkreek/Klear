@@ -34,8 +34,17 @@
     <Filter Include="헤더 파일\structures\linked_list\SLL">
       <UniqueIdentifier>{cf1ad87a-0317-458a-bfce-e9e1e9ba7456}</UniqueIdentifier>
     </Filter>
-    <Filter Include="헤더 파일\symbol_table">
+    <Filter Include="헤더 파일\Kode">
+      <UniqueIdentifier>{d2cf1f16-28af-4363-8a20-c436589339db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Klear">
+      <UniqueIdentifier>{1aa8f51d-1bba-41ee-a5f7-ff68abcff3ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\tables">
       <UniqueIdentifier>{94bc3d77-116e-4d68-8fbf-1f5b990f889a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Kode">
+      <UniqueIdentifier>{3319de4b-01d0-452f-842c-210e8354f1c1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -65,6 +74,9 @@
     </ClCompile>
     <ClCompile Include="sll_cursor.c">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="kode_main.c">
+      <Filter>소스 파일\Kode</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -104,16 +116,24 @@
     <ClInclude Include="sll_cursor.h">
       <Filter>헤더 파일\structures\linked_list\SLL</Filter>
     </ClInclude>
-    <ClInclude Include="symbol_type.h">
-      <Filter>헤더 파일\symbol_table</Filter>
-    </ClInclude>
     <ClInclude Include="symbol_table.h">
-      <Filter>헤더 파일\symbol_table</Filter>
+      <Filter>헤더 파일\tables</Filter>
+    </ClInclude>
+    <ClInclude Include="type_table.h">
+      <Filter>헤더 파일\tables</Filter>
+    </ClInclude>
+    <ClInclude Include="token.h">
+      <Filter>헤더 파일\Kode</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="note.txt">
-      <Filter>소스 파일</Filter>
+      <Filter>리소스 파일</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="main.kore">
+      <Filter>리소스 파일</Filter>
+    </None>
   </ItemGroup>
 </Project>

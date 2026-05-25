@@ -3,66 +3,98 @@
 #include <stdlib.h>
 #include <stdint.h>
 
-int K_int(int i)
-{
-	return (int64_t)i;
+Data data_create_raw(Data_Type type, K_Int i)      //caution: you can put all types of data with this func, EXCEPT for number(float, double) type datas.
+{													//and make sure to type cast.
+	return (Data) { .type = type, .r_data = { .i = i } };
 }
 
-int K_float(float f)
+Data data_create_int(K_Int i)
 {
-
-	void* _f = malloc(sizeof(float));
-	if (_f == NULL) return 0;
-	int64_t i = 0;
-
-	memcpy(_f, &f, sizeof(float));
-	i = *(int64_t*)_f;
-
-	free(_f);
-
-
-	return i;
+	return (Data) { .type = DATA_TYPE_INT, .r_data = { .i = i } };
 }
 
-
-Data* data_create(Data_Type type, int64_t r_data)
+Data data_create_float(K_Float f)
 {
-	Data* n = (Data*)malloc(sizeof(Data));
-	if (n == NULL) return;
-	n->type = type;
-	n->r_data = r_data;
-
-	return n;
+	return (Data) { .type = DATA_TYPE_FLOAT, .r_data = { .f = f } };
 }
 
-Data_Type data_get_type(const Data* n)
+Data data_create_obj(void* obj)
 {
-	if (n == NULL) return DATA_TYPE_NULL;
-	return n->type;
+	return (Data) { .type = DATA_TYPE_OBJ, .r_data = { .obj = obj } };
 }
 
-void data_modify(Data* n, rawData r_data)
+Data data_create_str(char* str)
 {
-	if (n == NULL || n->type == DATA_TYPE_UNDEFINED) return;
-
-	n->r_data = r_data;
+	return (Data) { .type = DATA_TYPE_STR, .r_data = { .s = str } };
 }
 
-Data* data_get(const Data* n)
+Data data_create_ptr(void* peter)
 {
-	if (n == NULL) return NULL;
+	return (Data) { .type = DATA_TYPE_PTR, .r_data = { .ptr = peter } };
+}
 
-	switch (data_get_type(n))
-	{
+Data data_create_null()
+{
+	return (Data) { .type = DATA_TYPE_NULL, .r_data = { .i = 0 } };
+}
 
-	case DATA_TYPE_NULL: return NULL;
-	case DATA_TYPE_INT: return n->data.i; break;
-	case DATA_TYPE_FLOAT: return n->data.f; break;
-	case DATA_TYPE_STR: return n->data.s; break;
-	case DATA_TYPE_OBJ: return n->data.obj; break;
-	default: return NULL;
+void data_copy(Data* dest, const Data* src)
+{
+	if (dest == NULL || src == NULL) return;
+	dest->type = src->type;
+	dest->r_data = src->r_data;
+}
 
-	}
+void data_swap(Data* dest, Data* src)
+{
+	if (dest == NULL || src == NULL) return;
+	Data _ = *dest;
+	dest->type = src->type;
+	dest->r_data = src->r_data;
+
+	src->type = _.type;
+	src->r_data = _.r_data;
+}
+
+K_Int data_get_raw(const Data data) //no num
+{
+	if (data.type == DATA_TYPE_NULL) return 0;
+	return data.r_data.i;
+}
+
+K_Int data_get_int(const Data data)
+{
+	if (data.type == DATA_TYPE_NULL) return 0;
+	return data.r_data.i;
+}
+
+K_Float data_get_float(const Data data)
+{
+	if (data.type == DATA_TYPE_NULL) return 0.;
+	return data.r_data.f;
+}
+
+char* data_get_str(const Data data)
+{
+	if (data.type == DATA_TYPE_NULL) return 0;
+	return data.r_data.s;
+}
+
+void* data_get_obj(const Data data)
+{
+	if (data.type == DATA_TYPE_NULL) return 0;
+	return data.r_data.obj;
+}
+
+void* data_get_ptr(const Data data)
+{
+	if (data.type == DATA_TYPE_NULL) return 0;
+	return data.r_data.ptr;
+}
+
+Data_Type data_get_type(const Data n)
+{
+	return n.type;
 }
 
 //char* node_data2str(const Node* s) //이거 node.c로 관리

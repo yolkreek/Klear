@@ -126,23 +126,39 @@ SLL_Node* sll_get_last_node(SLL* s)
 	return last_node;
 }
 
-Node_Type sll_node_type(const SLL* s, const SLL_Node* n)
+
+
+SLL_Node* sll_node_get_by_index(SLL* s, int index)
 {
-	if (n == NULL) return NODE_TYPE_NULL;
-
-	if (sll_is_empty(s))
-		return NODE_TYPE_NULL;
-	
-	if (s->num_of_nodes == 1 && n == s->head_node) return NODE_TYPE_WHOLE;
-
-	if (n == s->head_node)
-		return NODE_TYPE_HEAD;
-	else
+	if (index < 0 || index >= s->num_of_nodes)
 	{
-		if (n->next_node == NULL) return NODE_TYPE_TAIL;
-		else return NODE_TYPE_BODY;
+		return NULL;
 	}
+	SLL_Node* cur = s->head_node;
+
+	for (int i = 0; i < index; i++)
+		cur = cur->next_node;
+
+	return cur;
 }
+
+//Node_Type sll_node_type(const SLL* s, const SLL_Node* n)
+//{
+//	if (n == NULL) return NODE_TYPE_NULL;
+//
+//	if (sll_is_empty(s))
+//		return NODE_TYPE_NULL;
+//	
+//	if (s->num_of_nodes == 1 && n == s->head_node) return NODE_TYPE_WHOLE;
+//
+//	if (n == s->head_node)
+//		return NODE_TYPE_HEAD;
+//	else
+//	{
+//		if (n->next_node == NULL) return NODE_TYPE_TAIL;
+//		else return NODE_TYPE_BODY;
+//	}
+//}
 
 
 

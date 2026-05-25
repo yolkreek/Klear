@@ -1,0 +1,12 @@
+a = 1 + 2
+a = a + 3
+a++
+print(a)
+
+
+
+
+expected
+
+"a = 1 + 2\na = a + 3\na++\nprint(a)\n"
+a,=,1,+,2,\n,a,=,a,+,3,\n,a,++,\n,print(,a,)
