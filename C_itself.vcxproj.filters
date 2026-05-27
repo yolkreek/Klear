@@ -25,12 +25,6 @@
     <Filter Include="헤더 파일\structures\linked_list">
       <UniqueIdentifier>{2164091f-d48a-43e3-968d-a2e8fa0691d0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="헤더 파일\data">
-      <UniqueIdentifier>{9d2954e8-f7fd-4c7b-9b90-440da45f8780}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="헤더 파일\node">
-      <UniqueIdentifier>{11b11f45-0e48-481f-97e5-d5c8eb162110}</UniqueIdentifier>
-    </Filter>
     <Filter Include="헤더 파일\structures\linked_list\SLL">
       <UniqueIdentifier>{cf1ad87a-0317-458a-bfce-e9e1e9ba7456}</UniqueIdentifier>
     </Filter>
@@ -40,11 +34,23 @@
     <Filter Include="헤더 파일\Klear">
       <UniqueIdentifier>{1aa8f51d-1bba-41ee-a5f7-ff68abcff3ee}</UniqueIdentifier>
     </Filter>
-    <Filter Include="헤더 파일\tables">
-      <UniqueIdentifier>{94bc3d77-116e-4d68-8fbf-1f5b990f889a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\Kode">
       <UniqueIdentifier>{3319de4b-01d0-452f-842c-210e8354f1c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Kore_ISA">
+      <UniqueIdentifier>{b0ebbe43-cdb4-452e-b6f4-1a2ccbcc6db4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Kore_ISA\tables">
+      <UniqueIdentifier>{94bc3d77-116e-4d68-8fbf-1f5b990f889a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Kore_ISA\data">
+      <UniqueIdentifier>{9d2954e8-f7fd-4c7b-9b90-440da45f8780}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Klear">
+      <UniqueIdentifier>{2c445570-2d42-4b9c-a058-4b471fef1cea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\K_ISA">
+      <UniqueIdentifier>{403ae203-4565-4613-b0b8-0dfdf32276f4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -63,9 +69,6 @@
     <ClCompile Include="tree.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="node.c">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="data.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -76,6 +79,18 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="kode_main.c">
+      <Filter>소스 파일\Kode</Filter>
+    </ClCompile>
+    <ClCompile Include="opcode.c">
+      <Filter>소스 파일\K_ISA</Filter>
+    </ClCompile>
+    <ClCompile Include="klear_main.c">
+      <Filter>소스 파일\Klear</Filter>
+    </ClCompile>
+    <ClCompile Include="ast.c">
+      <Filter>소스 파일\Kode</Filter>
+    </ClCompile>
+    <ClCompile Include="token.c">
       <Filter>소스 파일\Kode</Filter>
     </ClCompile>
   </ItemGroup>
@@ -95,20 +110,11 @@
     <ClInclude Include="tree.h">
       <Filter>헤더 파일\structures\tree</Filter>
     </ClInclude>
-    <ClInclude Include="opcode.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="data.h">
-      <Filter>헤더 파일\data</Filter>
+      <Filter>헤더 파일\Kore_ISA\data</Filter>
     </ClInclude>
     <ClInclude Include="data_type.h">
-      <Filter>헤더 파일\data</Filter>
-    </ClInclude>
-    <ClInclude Include="node.h">
-      <Filter>헤더 파일\node</Filter>
-    </ClInclude>
-    <ClInclude Include="sll_node.h">
-      <Filter>헤더 파일\structures\linked_list</Filter>
+      <Filter>헤더 파일\Kore_ISA\data</Filter>
     </ClInclude>
     <ClInclude Include="singly_linked_list.h">
       <Filter>헤더 파일\structures\linked_list\SLL</Filter>
@@ -117,12 +123,27 @@
       <Filter>헤더 파일\structures\linked_list\SLL</Filter>
     </ClInclude>
     <ClInclude Include="symbol_table.h">
-      <Filter>헤더 파일\tables</Filter>
+      <Filter>헤더 파일\Kore_ISA\tables</Filter>
     </ClInclude>
     <ClInclude Include="type_table.h">
-      <Filter>헤더 파일\tables</Filter>
+      <Filter>헤더 파일\Kore_ISA\tables</Filter>
     </ClInclude>
     <ClInclude Include="token.h">
+      <Filter>헤더 파일\Kode</Filter>
+    </ClInclude>
+    <ClInclude Include="opcode.h">
+      <Filter>헤더 파일\Kore_ISA</Filter>
+    </ClInclude>
+    <ClInclude Include="instruction.h">
+      <Filter>헤더 파일\Kore_ISA</Filter>
+    </ClInclude>
+    <ClInclude Include="sll_node.h">
+      <Filter>헤더 파일\structures\linked_list\SLL</Filter>
+    </ClInclude>
+    <ClInclude Include="ast.h">
+      <Filter>헤더 파일\Kode</Filter>
+    </ClInclude>
+    <ClInclude Include="compile_time_error.h">
       <Filter>헤더 파일\Kode</Filter>
     </ClInclude>
   </ItemGroup>

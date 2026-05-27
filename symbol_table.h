@@ -2,7 +2,7 @@
 #include "singly_linked_list.h"
 
 typedef enum _Symbol_Type Symbol_Type;
-typedef struct _Symbol Symbol_Node;
+typedef struct _Symbol_Node Symbol_Node;
 typedef struct _Symbol_Table Symbol_Table;
 
 enum _Symbol_Type
@@ -12,10 +12,12 @@ enum _Symbol_Type
 	SYMBOL_TYPE_FUNC,
 };
 
-struct Symbol_Node
+struct _Symbol_Node
 {
+	int index;
 	Symbol_Type stype;
 	char* sname;
+	Data* address;
 };
 
 struct _Symbol_Table //symbol_node objects' SLL

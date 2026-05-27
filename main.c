@@ -3,10 +3,11 @@
 #include <string.h>
 #include <stdlib.h>
 #include "structures.h"
+#include "token.h"
 
 int main()
 {
-	Stack* steak = stack_create(10);
+	/*Stack* steak = stack_create(10);
 	Tree* tree = tree_create();
 
 	tree_set_root(tree, data_create_int(50));
@@ -20,13 +21,18 @@ int main()
 	tree_add(tree, tree_explore(tree, "><<"), data_create_ptr(0x12), T_RIGHT);
 	Tree_node* test = tree_explore(tree, "><>>>>>>>");
 
-	Stack* dfs = tree_DFS(tree);
+	Stack* dfs = tree_DFS(tree);*/
 
-	int p[5] = { 0, 1, 2, 3, 4 };
-	printf("%d\n", sizeof(p));
-	printf("%p\n", p);
+	char code[200] = "abc_4 = 5 + 5\naa = abc_4 + 1\nprint(a)";
+	char** tokens = tokenization(code);
 
-	printf("%d", sizeof(so_raw));
+	for (int i = 0; tokens[i] != NULL; i++)
+	{
+		printf("%s\n", tokens[i]);
+	}
+	
+
+
 	
 	return 0;
 }

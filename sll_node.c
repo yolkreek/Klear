@@ -3,11 +3,10 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-SLL_Node* sllnode_create(Data_Type type, Data data)
+SLL_Node* sllnode_create(Data data)
 {
-	SLL_Node* sn = (SLL_Node*)calloc(1, sizeof(SLL_Node));
-	sn->node.type = type;
-	sn->node.data = data;
+	SLL_Node* sn = (SLL_Node*)malloc(sizeof(SLL_Node));
+	sn->data = data;
 	sn->next_node = NULL;
 
 	return sn;

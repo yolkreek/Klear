@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
-#include "data_type.h"
+#include "data.h"
 #include "sll_node.h"
 #define _SLL_BUFFER_SIZE 20
 
@@ -27,10 +27,11 @@ void sll_kill(SLL** s);
 bool sll_is_empty(const SLL* s);
 void sll_print_info(const SLL* s);
 
-void sll_append(SLL* sll, Data_Type type, void* data);
+void sll_append(SLL* s, SLL_Node* sn);
 void sll_pop(SLL* s);
 SLL_Node* sll_get_last_node(const SLL* s);
-Node_Type sll_node_type(const SLL* s, const Node* n);
+
+SLL_Node* sll_node_get_by_index(SLL* s, int index);
 
 
 

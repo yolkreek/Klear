@@ -127,23 +127,28 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ast.c" />
     <ClCompile Include="data.c" />
+    <ClCompile Include="klear_main.c" />
     <ClCompile Include="kode_main.c" />
     <ClCompile Include="main.c" />
-    <ClCompile Include="node.c" />
+    <ClCompile Include="opcode.c" />
     <ClCompile Include="singly_linked_list.c" />
     <ClCompile Include="sll_cursor.c" />
     <ClCompile Include="sll_node.c" />
     <ClCompile Include="structures.h" />
     <ClCompile Include="stack.c" />
+    <ClCompile Include="token.c" />
     <ClCompile Include="tree.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ast.h" />
     <ClInclude Include="circular_linked_list.h" />
+    <ClInclude Include="compile_time_error.h" />
     <ClInclude Include="data.h" />
     <ClInclude Include="doubly_linked_list.h" />
+    <ClInclude Include="instruction.h" />
     <ClInclude Include="linked_list.h" />
-    <ClInclude Include="node.h" />
     <ClInclude Include="opcode.h" />
     <ClInclude Include="singly_linked_list.h" />
     <ClInclude Include="sll_cursor.h" />
