@@ -1,1 +1,1 @@
-# Virtual Machine for Klang.
+# Virtual Machine for Kore.
